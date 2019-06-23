@@ -1,0 +1,48 @@
+<app-home></app-home>
+
+<form #searchForm="ngForm" class="col-s12" (ngSubmit) = "OnSubmit(searchForm)">
+  <div class="row">
+    <div class="input-field col s4">
+      <input type="text" name="productSerialNumber" [(ngModel)]='productSerialNumber' required>
+      <label data-error="Required Feild!"> Product Serial Number</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s2">
+        <button [disabled]="!searchForm.valid" class="btn-large btn-submit">Search</button>
+    </div>
+    <!-- <div class="col s2">
+      <button class="btn-large btn-submit">Get All</button>
+    </div> -->
+  </div>
+
+  <div *ngIf="productList.length > 0">
+  <table>
+    <thead>
+      <tr>
+          <th>Serial Number</th>
+          <th>Product Name</th>
+          <th>Item Price</th>
+          <th>Item Quantity</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor = "let product of productList">
+        <td> {{ product.productName }}</td>
+        <td> {{ product.productSerialNumber }}</td>
+        <td> {{ product.price }}</td>
+        <td> {{ product.quantity }}</td>
+      </tr>
+      
+    </tbody>
+  </table>
+  </div>
+
+
+</form>
+
+
+
+
+
