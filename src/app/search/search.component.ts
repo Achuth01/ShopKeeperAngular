@@ -23,7 +23,7 @@ export class SearchComponent implements OnInit {
 
   OnSubmit(form:NgForm){
     this.productService.getProductDetails( this.productSerialNumber).subscribe((data:any) => {
-                    this.productList = data;
+                    this.productList.push(data);
     },
     (error:any)=>{
       this.toastr.error(error.error.message);

@@ -1,62 +1,77 @@
 <app-home></app-home>
 
-<form #customerDetailsForm="ngForm" class="col s12 white" (ngSubmit)="getInvoiceDetails()">
-
+<div class="container">
   <div class="row">
-    <div class="input-field col s4">
-      <input type="text" required [(ngModel)]='invoiceNumber' name="invoice number">
-      <label>Invoice Number</label>
-    </div>
-  </div>
+    <div class="col s8 offset-s2">
+      <h5>Invoice Details:</h5>
+      <form #customerDetailsForm="ngForm" class="col s12 white" (ngSubmit)="getInvoiceDetails()">
 
-  <div class="row">
-    <div class="input-field col s4">
-      <button class="btn-large btn-submit">Get Invoice Details</button>
-    </div>
-  </div>
+        <div class="row">
+          <div class="input-field col s4">
+            <input type="text" required [(ngModel)]='invoiceNumber' name="invoice number">
+            <label>Invoice Number</label>
+          </div>
+          <div class="input-field col s3">
+            <button [disabled]="!invoiceNumber" class="btn btn-submit">Get Invoice</button>
+          </div>
+        </div>
 
-  <div class="customer" *ngIf="customerDetails">
+        <!-- <div class="customer" *ngIf="customerDetails">
+         <div class="row">
+            <div class="input-field col s12">
 
-    <div class="row">
-      <div class="input-field col s12">
-        
-          Name : {{ customerDetails.customerName }}
-        <p> 
-          Address : {{ customerDetails.customerAddress }}
-        </p>
-        <p>
-          Purchased Date : {{ customerDetails.purchasedDate }}
-        </p>
+              Name : {{ customerDetails.customerName }}
+                Address : {{ customerDetails.customerAddress }}
+                Purchased Date : {{ customerDetails.purchasedDate }}
+            </div>
+          </div>
+        </div> -->
+
+        <div class="customer" *ngIf="customerDetails">
+          <table>
+            <thead>
+              <tr>
+                <th> Customer Name </th>
+                <th> Customer Address </th>
+                <th> Purchased Date </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td> {{ customerDetails.customerName }} </td>
+                <td> {{ customerDetails.customerAddress }} </td>
+                <td> {{ customerDetails.purchasedDate }} </td>
+              </tr>
+            </tbody>
+          </table>
+
+
+
+        <div *ngIf="customerDetails.productsPurchasedList.length > 0">
+          <table>
+            <thead>
+              <tr>
+                <th> Product Name </th>
+                <th> Product Serial Number </th>
+                <th> Price </th>
+                <th> Quantities </th>
+                <th> Item price </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let product of customerDetails.productsPurchasedList'>
+                <td> {{ product.productSerialNumber }} </td>
+                <td> {{ product.productName }} </td>
+                <td> {{ product.price }} </td>
+                <td> {{ product.quantitiesSold }} </td>
+                <td> {{ product.itemPrice }} </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
+
+      </form>
     </div>
-
-
-
-
-
   </div>
-
-
-  <div *ngIf="customerDetails.productsPurchasedList.length > 0">
-    <table>
-      <thead>
-        <tr>
-          <th> Product Name </th>
-          <th> Product Serial Number </th>
-          <th> Price </th>
-          <th> Quantities </th>
-          <th> Item price </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor='let product of customer.productsPurchasedList'>
-          <td> {{ product.productSerialNumber }} </td>
-          <td> {{ product.productName }} </td>
-          <td> {{ product.price }} </td>
-          <td> {{ product.quantitiesSold }} </td>
-          <td> {{ product.itemPrice }} </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</form>
+</div>

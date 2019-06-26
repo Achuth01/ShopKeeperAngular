@@ -38,7 +38,8 @@ import { InvoiceComponent } from './invoice/invoice.component';
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
-    AppRoutersModule
+    AppRoutersModule,
+    RouterModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
