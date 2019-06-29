@@ -19,9 +19,8 @@ export class InvoiceComponent implements OnInit {
 
 
   getInvoiceDetails(){
-    this.customerService.getCustomerDetails(this.invoiceNumber, (customerDetails:any) => {
-    this.customerDetails = customerDetails;
-    console.log(this.customerDetails);
-    });
+    this.customerService.getCustomerDetails(this.invoiceNumber).subscribe((response:Customer)=>{
+         this.customerDetails = response;
+    })
   }
 }

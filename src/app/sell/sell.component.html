@@ -1,42 +1,42 @@
-<!-- 
 <app-home></app-home>
 
-  <form #customerDetailsForm="ngForm" class="col s12 white" (ngSubmit)="addCustomerDetails()">
+<div class="container">
+  <div class="row">
 
-    <div class="row">
-      <div class="col s8 offset-s2">
-        <h4>Customer Info</h4>
-        <div class="row">
-          <div class="input-field col s6">
-            <input type="text" required [(ngModel)]='customer.customerName' name='customer name'>
-            <label data-error="Required feild!">Customer Name</label>
+    <div class="col s8 offset-s2">
+      <div class="card blue-grey">
+        Customer Info
+        <form #customerDetailsForm="ngForm" class="col s12 white">
+          <div class="row">
+            <div class="input-field col s6">
+              <input type="text" class="validate" required [(ngModel)]='customer.customerName' id='customer name' name='customer name'>
+              <label for='customer name' data-error="Required feild!">Customer Name</label>
+            </div>
+            <div class="input-field col s6">
+                <input type="text" class="datepicker validate"  required [(ngModel)]='customer.purchasedDate' id="purchased date" name='purchased date'>
+                <label for="purchased date" data-error="Required Feild!">Purchased Date</label>           
+              </div>
+            <div class="input-field col s12">
+              <input type="text" class="validate" required [(ngModel)]='customer.customerAddress' id='customer address' name='customer address'>
+              <label for="customer address" data-error="Required Feild!">Customer Address</label>
+            </div>
+           
           </div>
-          <div class="input-field col s6">
-            <input type="text" required [(ngModel)]='customer.customerAddress' name='customer address'>
-            <label data-error="Required Feild!">Customer Address</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col s12">
-            <label> Purchased Date</label>
-          </div>
-          <div class="input-field col s6">
-            <input type="date" class="datepicker" [(ngModel)]='customer.purchasedDate' name='purchased date'>
-          </div>
-        </div>
+        </form>
       </div>
     </div>
 
-      <div class="row">
-        <div class="col s12 offset-s2">
-          <h4>Product Info</h4>
+    <div class="col s8 offset-s2">
+      <div class="card blue-grey">
+        Products Sold
+        <form #productPurchasedForm="ngForm" class="col s12 white" (ngSubmit)="getProductDetails()">
           <div class="row">
-            <div class="input-field col s4">
-              <input type="text" required name="product number" [(ngModel)]="productNumber">
-              <label>ProductSerialNumber</label>
+            <div class="input-field col s6">
+              <input type="text" class='validate' required [(ngModel)]="productNumber" id='product number' name="product number">
+              <label for='product number' data-error='Required Feild!'>ProductSerialNumber</label>
             </div>
-            <div class="input-field col s4">
-              <button [disabled]="!productNumber" class="btn" (click)="getProductDetails()">Add</button>
+            <div class="input-field col s6">
+              <button [disabled]="!productPurchasedForm.valid" class="btn-large btn-submit">Add</button>
             </div>
           </div>
           <div *ngIf="customer.productsPurchasedList.length > 0">
@@ -57,216 +57,47 @@
                   <td> {{ product.price }}</td>
                   <td> <input type="text" [(ngModel)]='product.quantitiesSold' (ngModelChange)="calculateItemPrice()"
                       name="quantities sold" required value='product.quantitiesSold'>
-                    {{ product.quantitiesSold }}  
+                    {{ product.quantitiesSold }}
                   </td>
                   <td> {{ product.itemPrice }}</td>
                 </tr>
               </tbody>
             </table>
           </div>
-        </div>
-      </div>
-
-
-    <div *ngIf="totalPrice">
-      <div class="row">
-        <div class="col s12 offset-s2">
-          <h4>Total Price</h4>
-          <div class="row">
-            <div class="input-field col s8">
-              <p> Total Price: {{ totalPrice }} </p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s8">
-              <button [disabled] = "!customerDetailsForm.valid" class="btn-large btn-submit">Submit</button>
-            </div>
-          </div>
-        </div>
+        </form>
       </div>
     </div>
-  </form>
 
+      <div class="col s8 offset-s2" *ngIf="totalPrice">
+        <div class="card blue-grey">
+          Total Price
+          <form #totalPriceForm="ngForm" class="col s12 white" (ngSubmit)="addCustomerDetails()">
+            <div class="row">
+              <div class="input-field col s12 offset-s4">
+                Total Price: {{ totalPrice }} 
+              </div>
+              <div class="input-field col s12">
+                <button [disabled]="!customerDetailsForm.valid" class="btn-large btn-submit">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
 
     <div *ngIf="customer.invoiceNumber">
-        <h4>Invoice Number</h4>
-    <div class="row">
-        <div class="input-field col s8 offset-s2">
-          <p> Invoice number generated is: {{ customer.invoiceNumber }} </p>
-        </div>
-      </div>
-    </div>
-
- -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<app-home></app-home>
-
-<div class="container">
-  <div class="row">
-    <div class="col s8 offset-s2">
-      <!-- <div class="card grey"> -->
-      <h5>Customer Info</h5>
-      <form #customerDetailsForm="ngForm" class="col s12 white">
-        <div class="row">
-          <div class="input-field col s6">
-            <input type="text" required [(ngModel)]='customer.customerName' name='customer name'>
-            <label data-error="Required feild!">Customer Name</label>
-          </div>
-          <div class="input-field col s6">
-            <input type="text" required [(ngModel)]='customer.customerAddress' name='customer address'>
-            <label data-error="Required Feild!">Customer Address</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col s12">
-            <label> Purchased Date</label>
-          </div>
-          <div class="input-field col s6">
-            <input type="date" class="datepicker" [(ngModel)]='customer.purchasedDate' name='purchased date'>
-          </div>
-        </div>
-      </form>
-    </div>
-    <!-- </div> -->
-  </div>
-</div>
-
-
-<div class="container">
-  <div class="row">
-    <div class="col s8 offset-s2">
-      <!-- <div class="card grey"> -->
-      <h5>Product info</h5>
-      <form #productPurchasedForm class="col s12 white" (ngSubmit)="getProductDetails()">
-        <div class="row">
-          <div class="input-field col s6">
-            <input type="text" required name="product number" [(ngModel)]="productNumber">
-            <label>ProductSerialNumber</label>
-          </div>
-          <div class="input-field col s2">
-            <button [disabled]="productPurchasedForm.notValid" class="btn btn-submit">Add</button>
-          </div>
-        </div>
-        <div *ngIf="customer.productsPurchasedList.length > 0">
-          <table>
-            <thead>
-              <tr>
-                <th>Serial Number</th>
-                <th>Product Name</th>
-                <th>Item Price</th>
-                <th>Item Quantity</th>
-                <th>Total Price</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor='let product of customer.productsPurchasedList'>
-                <td> {{ product.productSerialNumber }}</td>
-                <td> {{ product.productName }}</td>
-                <td> {{ product.price }}</td>
-                <td> <input type="text" [(ngModel)]='product.quantitiesSold' (ngModelChange)="calculateItemPrice()"
-                    name="quantities sold" required value='product.quantitiesSold'>
-                  {{ product.quantitiesSold }}
-                </td>
-                <td> {{ product.itemPrice }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </form>
-    </div>
-    <!-- </div> -->
-  </div>
-</div>
-
-
-
-<div *ngIf="totalPrice">
-  <div class="container">
-
-    <div class="row">
-      <div class="col s8 offset-s2">
-        <h5>Total Price</h5>
-        <form #customerForm class="col s12 white" (ngSubmit)="addCustomerDetails()">
-          <div class="row">
-            <div class="input-field col s6">
-              <p> Total Price: {{ totalPrice }} </p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s4">
-              <button [disabled]="!customerDetailsForm.valid" class="btn btn-submit">Submit</button>
-            </div>
-          </div>
-
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- 
-<div class="container">
-  <div class="row">
-    <div class="col s8 offset-s2">
-      <div class="">
-        <h5>Total Price</h5>
-        <form #customerForm class="col s12 white" (ngSubmit)="addCustomerDetails()">
-          <div class="row">
-            <div class="input-field col s8">
-              <p> Total Price: {{ totalPrice }} </p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s8">
-              <button class="btn btn-submit">Submit</button>
-            </div>
-          </div>
-        </form>
-
-      </div>
-    </div>
-  </div>
-</div> -->
-
-
-
-<!-- <div class="invoice" *ngIf="customer.invoiceNumber">
-  <p>Invoice number generated is: {{ customer.invoiceNumber }}</p>
-</div> -->
-
-<div *ngIf="customer.invoiceNumber">
-  <div class="container">
-    <div class="row">
       <div class="input-field col s8 offset-s2">
-        <h5>Invoice Number</h5>
-        <form #customerForm class="col s12 white" (ngSubmit)="addCustomerDetails()">
-          <div class="row">
-            <div class="input-field col s8">
-              <p> Invoice number generated is: {{ customer.invoiceNumber }} </p>
+        <div class="card blue-grey">
+          Invoice Number
+          <form #invoiceForm="ngForm" class="col s12 white" (ngSubmit)="addCustomerDetails()">
+            <div class="row">
+              <div class="input-field col s12 offset-s4">
+                Invoice number generated is: {{ customer.invoiceNumber }}
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
+
   </div>
 </div>
